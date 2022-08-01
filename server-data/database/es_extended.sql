@@ -87,12 +87,12 @@ CREATE TABLE IF NOT EXISTS `banking` (
 -- Dump dei dati della tabella es_extended.banking: ~2 rows (circa)
 INSERT INTO `banking` (`identifier`, `type`, `amount`, `time`) VALUES
 
--- Dump della struttura di tabella es_extended.cardealer_vehicles
-CREATE TABLE IF NOT EXISTS `cardealer_vehicles` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `vehicle` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `price` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE `cardealer_vehicles` (
+	`id` int NOT NULL AUTO_INCREMENT,
+	`vehicle` varchar(255) NOT NULL,
+	`price` int NOT NULL,
+
+	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dump dei dati della tabella es_extended.cardealer_vehicles: ~0 rows (circa)
