@@ -87,12 +87,12 @@ CREATE TABLE IF NOT EXISTS `banking` (
 -- Dump dei dati della tabella es_extended.banking: ~2 rows (circa)
 INSERT INTO `banking` (`identifier`, `type`, `amount`, `time`) VALUES
 
-CREATE TABLE `cardealer_vehicles` (
-	`id` int NOT NULL AUTO_INCREMENT,
-	`vehicle` varchar(255) NOT NULL,
-	`price` int NOT NULL,
-
-	PRIMARY KEY (`id`)
+-- Dump della struttura di tabella es_extended.cardealer_vehicles
+CREATE TABLE IF NOT EXISTS `cardealer_vehicles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `vehicle` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dump dei dati della tabella es_extended.cardealer_vehicles: ~0 rows (circa)
@@ -230,6 +230,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 -- Dump dei dati della tabella es_extended.users: ~1 rows (circa)
 INSERT INTO `users` (`identifier`, `accounts`, `group`, `inventory`, `job`, `job_grade`, `loadout`, `position`, `skin`, `firstname`, `lastname`, `dateofbirth`, `sex`, `height`, `is_dead`, `disabled`) VALUES
+
 
 -- Dump della struttura di tabella es_extended.user_licenses
 CREATE TABLE IF NOT EXISTS `user_licenses` (
