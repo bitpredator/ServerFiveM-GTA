@@ -1,0 +1,32 @@
+{
+  "config": {
+      "loading": {
+        "loading_txt": "Loading Online"
+      },
+      "logo": {
+        "img_url": "img/logo.png"
+      },
+      "bg": {
+          "1": {
+              "img_url": "img/bg-1.jpg"
+          },
+          "2": {
+              "img_url": "img/bg-2.jpg"
+          }
+      },
+      "slider": {
+          "1": {
+              "title":"GTA Online",
+              "subtitle":"GTA Online FiveM Benvenuto",
+              "description" : "<p>Qui inizia la tua avventura tieni forte.</p>",
+              "img_url": "img/bg-2.jpg"
+          },
+          "2": {
+              "title":"GTA Online",
+              "subtitle":"Combatti e vinci",
+              "description" : "<p>Combatti i tuoi nemici più potenti e crea il tuo impero.</p>",
+              "img_url": "img/bg-1.jpg"
+          }
+      }
+  }
+}

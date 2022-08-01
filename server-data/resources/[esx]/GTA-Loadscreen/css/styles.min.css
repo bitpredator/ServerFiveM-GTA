@@ -1,0 +1,18 @@
+/*
+	bexolumu-gtav-loadscreen
+	Created by bexolumu
+
+	For discussions, information on future updates, and more, join
+	Discord: 
+
+	Copyright (c) 2020-2021 bexolumu
+
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	SOFTWARE.
+*/
+body{overflow:hidden;height:100vh;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:#000}.slider-bg{position:absolute;top:0;left:0;right:0;z-index:50}.slider-bg .item{height:100vh;background-size:cover;background-repeat:no-repeat;background-position:center}.slider-bg .item,.slider-mid .item{display:none}.slider-bg .item:first-child,.slider-mid .item:first-child{display:block}.container-fluid{position:relative;z-index:100}.bg-black{background-color:rgb(0 0 0 / 70%)}.box{height:450px}.bg-img{background-size:cover;background-repeat:no-repeat;background-position:center}.footer{position:absolute;z-index:110;bottom:25px;left:48px;right:48px}.logo{max-height:170px;max-width:170px}.loader{height:20px;position:relative;top:-2px}span.bg-black.text-light{font-size:12px}
