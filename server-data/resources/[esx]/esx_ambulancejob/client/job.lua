@@ -306,14 +306,6 @@ AddEventHandler('esx_ambulancejob:hasEnteredMarker', function(hospital, part, pa
 		CurrentAction = part
 		CurrentActionMsg = _U('open_pharmacy')
 		CurrentActionData = {}
-	elseif part == 'Vehicles' then
-		CurrentAction = part
-		CurrentActionMsg = _U('garage_prompt')
-		CurrentActionData = {hospital = hospital, partNum = partNum}
-	elseif part == 'Helicopters' then
-		CurrentAction = part
-		CurrentActionMsg = _U('helicopter_prompt')
-		CurrentActionData = {hospital = hospital, partNum = partNum}
 	elseif part == 'FastTravelsPrompt' then
 		local travelItem = Config.Hospitals[hospital][part][partNum]
 
