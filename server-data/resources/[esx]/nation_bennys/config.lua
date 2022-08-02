@@ -307,11 +307,7 @@ config.prices = {
 
 config.locais = {
 	[1] = vec3(-336.026367, -136.338455, 39.002197),
-	[2] = vec3(-214.45,-1319.79,30.89),
-	[3] = vec3(-1403.67,-3007.33, 13.96),
-	[4] = vec3(938.26,-978.40,39.57),
-	[5] = vec3(937.15,-963.08,39.57),
-	[6] = vec3(957.14,-980.95,39.58)
+	[2] = vec3(-212.373627, -1324.575806, 30.240234)
 }
 config.societymoney = false
 config.society_name = 'society_mechanic' -- will work only if mechaniconly is false

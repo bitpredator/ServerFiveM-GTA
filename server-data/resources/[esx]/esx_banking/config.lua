@@ -5,7 +5,7 @@ Config.ZDiff        = 2.0
 Config.Locale       = 'it'
 
 Config.Blips = {
-	Enabled = true,
+	Enabled = false, -- put true to display the points on the map
 	Sprite = 106,
 	Scale = 0.7,
 	Color = 2,
