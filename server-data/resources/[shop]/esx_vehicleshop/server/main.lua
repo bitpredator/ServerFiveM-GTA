@@ -1,6 +1,5 @@
 local categories, vehicles = {}, {}
 
-TriggerEvent('esx_phone:registerNumber', 'cardealer', _U('dealer_customers'), false, false)
 TriggerEvent('esx_society:registerSociety', 'cardealer', _U('car_dealer'), 'society_cardealer', 'society_cardealer', 'society_cardealer', {type = 'private'})
 
 CreateThread(function()
@@ -109,49 +108,6 @@ AddEventHandler('esx_vehicleshop:rentVehicle', function(vehicle, plate, rentPric
 			end
 		end)
 	end
-end)
-
-RegisterNetEvent('esx_vehicleshop:getStockItem')
-AddEventHandler('esx_vehicleshop:getStockItem', function(itemName, count)
-	local source = source
-	local xPlayer = ESX.GetPlayerFromId(source)
-
-	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_cardealer', function(inventory)
-		local item = inventory.getItem(itemName)
-
-		-- is there enough in the society?
-		if count > 0 and item.count >= count then
-
-			-- can the player carry the said amount of x item?
-			if xPlayer.canCarryItem(itemName, count) then
-				inventory.removeItem(itemName, count)
-				xPlayer.addInventoryItem(itemName, count)
-				xPlayer.showNotification(_U('have_withdrawn', count, item.label))
-			else
-				xPlayer.showNotification(_U('player_cannot_hold'))
-			end
-		else
-			xPlayer.showNotification(_U('not_enough_in_society'))
-		end
-	end)
-end)
-
-RegisterNetEvent('esx_vehicleshop:putStockItems')
-AddEventHandler('esx_vehicleshop:putStockItems', function(itemName, count)
-	local source = source
-	local xPlayer = ESX.GetPlayerFromId(source)
-
-	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_cardealer', function(inventory)
-		local item = inventory.getItem(itemName)
-
-		if item.count >= 0 then
-			xPlayer.removeInventoryItem(itemName, count)
-			inventory.addItem(itemName, count)
-			xPlayer.showNotification(_U('have_deposited', count, item.label))
-		else
-			xPlayer.showNotification(_U('invalid_amount'))
-		end
-	end)
 end)
 
 ESX.RegisterServerCallback('esx_vehicleshop:getCategories', function(source, cb)
@@ -321,12 +277,6 @@ ESX.RegisterServerCallback('esx_vehicleshop:resellVehicle', function(source, cb,
 	end
 end)
 
-ESX.RegisterServerCallback('esx_vehicleshop:getStockItems', function(source, cb)
-	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_cardealer', function(inventory)
-		cb(inventory.items)
-	end)
-end)
-
 ESX.RegisterServerCallback('esx_vehicleshop:getPlayerInventory', function(source, cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local items = xPlayer.inventory
@@ -394,7 +344,7 @@ function PayRent()
 				if bank >= sum and #v > 1 then
 					total = total + sum
 					xPlayer.removeAccountMoney('bank', sum)
-					xPlayer.showNotification(('You have paid $%s for all of your rentals'):format(ESX.Math.GroupDigits(sum)))
+					xPlayer.showNotification(('You have paid ~g~$%s~s~ for all of your rentals'):format(ESX.Math.GroupDigits(sum)))
 				else
 					for i = 1, #v do
 						local rental = v[i]
