@@ -1,9 +1,5 @@
 local playersHealing, deadPlayers = {}, {}
 
-if GetResourceState("esx_phone") ~= 'missing' then
-TriggerEvent('esx_phone:registerNumber', 'ambulance', _U('alert_ambulance'), true, true)
-end
-
 if GetResourceState("esx_society") ~= 'missing' then
 TriggerEvent('esx_society:registerSociety', 'ambulance', 'Ambulance', 'society_ambulance', 'society_ambulance', 'society_ambulance', {type = 'public'})
 end
@@ -173,58 +169,6 @@ ESX.RegisterServerCallback('esx_ambulancejob:getItemAmount', function(source, cb
 	cb(quantity)
 end)
 
-ESX.RegisterServerCallback('esx_ambulancejob:buyJobVehicle', function(source, cb, vehicleProps, type)
-	local xPlayer = ESX.GetPlayerFromId(source)
-	local price = getPriceFromHash(vehicleProps.model, xPlayer.job.grade_name, type)
-
-	-- vehicle model not found
-	if price == 0 then
-		cb(false)
-	else
-		if xPlayer.getMoney() >= price then
-			xPlayer.removeMoney(price)
-
-			MySQL.insert('INSERT INTO owned_vehicles (owner, vehicle, plate, type, job, `stored`) VALUES (?, ?, ?, ?, ?, ?)', {xPlayer.identifier, json.encode(vehicleProps), vehicleProps.plate, type, xPlayer.job.name, true},
-			function (rowsChanged)
-				cb(true)
-			end)
-		else
-			cb(false)
-		end
-	end
-end)
-
-ESX.RegisterServerCallback('esx_ambulancejob:storeNearbyVehicle', function(source, cb, plates)
-	local xPlayer = ESX.GetPlayerFromId(source)
-
-	local plate = MySQL.scalar.await('SELECT plate FROM owned_vehicles WHERE owner = ? AND plate IN (?) AND job = ?', {xPlayer.identifier, plates, xPlayer.job.name})
-
-	if plate then
-		MySQL.update('UPDATE owned_vehicles SET `stored` = true WHERE owner = ? AND plate = ? AND job = ?', {xPlayer.identifier, plate, xPlayer.job.name},
-		function(rowsChanged)
-			if rowsChanged == 0 then
-				cb(false)
-			else
-				cb(plate)
-			end
-		end)
-	else
-		cb(false)
-	end
-end)
-
-function getPriceFromHash(vehicleHash, jobGrade, type)
-	local vehicles = Config.AuthorizedVehicles[type][jobGrade]
-
-	for i = 1, #vehicles do
-		local vehicle = vehicles[i]
-		if GetHashKey(vehicle.model) == vehicleHash then
-			return vehicle.price
-		end
-	end
-
-	return 0
-end
 
 RegisterNetEvent('esx_ambulancejob:removeItem')
 AddEventHandler('esx_ambulancejob:removeItem', function(item)
