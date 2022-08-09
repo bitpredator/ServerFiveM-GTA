@@ -1,7 +1,6 @@
 local CurrentAction, CurrentActionMsg, CurrentActionData = nil, '', {}
 local HasAlreadyEnteredMarker, LastHospital, LastPart, LastPartNum
 local isBusy, deadPlayers, deadPlayerBlips, isOnDuty = false, {}, {}, false
-isInShopMenu = false
 
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(xPlayer)
@@ -61,14 +60,6 @@ CreateThread(function()
 	end
 end)
 
-AddEventHandler('esx_ambulancejob:hasExitedMarker', function(hospital, part, partNum)
-	if not isInShopMenu then
-		ESX.UI.Menu.CloseAll()
-	end
-
-	CurrentAction = nil
-end)
-
 -- Key Controls
 CreateThread(function()
 	while true do
@@ -91,15 +82,6 @@ CreateThread(function()
 		Wait(sleep)
 	end
 end)
-
-RegisterCommand("ambulance", function(src)
-	if ESX.PlayerData.job and ESX.PlayerData.job.name == 'ambulance' and not ESX.PlayerData.dead then
-		OpenMobileAmbulanceActionsMenu()
-	end
-end)
-
-RegisterKeyMapping("ambulance", "Open Ambulance Actions Menu", "keyboard", "k")
-
 
 RegisterNetEvent('esx_ambulancejob:heal')
 AddEventHandler('esx_ambulancejob:heal', function(healType, quiet)
@@ -130,22 +112,6 @@ AddEventHandler('esx_ambulancejob:setDeadPlayers', function(_deadPlayers)
 		end
 
 		for playerId,status in pairs(deadPlayers) do
-			if status == 'distress' then
-				local player = GetPlayerFromServerId(playerId)
-				local playerPed = GetPlayerPed(player)
-				local blip = AddBlipForEntity(playerPed)
-
-				SetBlipSprite(blip, 303)
-				SetBlipColour(blip, 1)
-				SetBlipFlashes(blip, true)
-				SetBlipCategory(blip, 7)
-
-				BeginTextCommandSetBlipName('STRING')
-				AddTextComponentSubstringPlayerName(_U('blip_dead'))
-				EndTextCommandSetBlipName(blip)
-
-				deadPlayerBlips[playerId] = blip
-			end
 		end
 	end
 end)

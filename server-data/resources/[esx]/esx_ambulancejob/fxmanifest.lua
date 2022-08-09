@@ -22,11 +22,9 @@ server_scripts {
 client_scripts {
 	'client/main.lua',
 	'client/job.lua',
-	'client/vehicle.lua',
 }
 
 dependencies {
 	'es_extended',
-	'esx_skin',
-	'esx_vehicleshop'
+	'esx_skin'
 }

@@ -1,9 +1,5 @@
 local playersHealing, deadPlayers = {}, {}
 
-if GetResourceState("esx_society") ~= 'missing' then
-TriggerEvent('esx_society:registerSociety', 'ambulance', 'Ambulance', 'society_ambulance', 'society_ambulance', 'society_ambulance', {type = 'public'})
-end
-
 RegisterNetEvent('esx_ambulancejob:revive')
 AddEventHandler('esx_ambulancejob:revive', function(playerId)
 	playerId = tonumber(playerId)
@@ -22,11 +18,7 @@ AddEventHandler('esx_ambulancejob:revive', function(playerId)
 						xPlayer.showNotification(_U('revive_complete', xTarget.name))
 						xTarget.triggerEvent('esx_ambulancejob:revive')
 					end
-				else
-					xPlayer.showNotification(_U('player_not_unconscious'))
 				end
-			else
-				xPlayer.showNotification(_U('revive_fail_offline'))
 			end
 		end
 end)
@@ -44,19 +36,6 @@ RegisterNetEvent('esx:onPlayerDeath')
 AddEventHandler('esx:onPlayerDeath', function(data)
 	deadPlayers[source] = 'dead'
 	TriggerClientEvent('esx_ambulancejob:setDeadPlayers', -1, deadPlayers)
-end)
-
-RegisterServerEvent('esx_ambulancejob:svsearch')
-AddEventHandler('esx_ambulancejob:svsearch', function()
-  TriggerClientEvent('esx_ambulancejob:clsearch', -1, source)
-end)
-
-RegisterNetEvent('esx_ambulancejob:onPlayerDistress')
-AddEventHandler('esx_ambulancejob:onPlayerDistress', function()
-	if deadPlayers[source] then
-		deadPlayers[source] = 'distress'
-		TriggerClientEvent('esx_ambulancejob:setDeadPlayers', -1, deadPlayers)
-	end
 end)
 
 RegisterNetEvent('esx:onPlayerSpawn')
@@ -80,15 +59,6 @@ AddEventHandler('esx_ambulancejob:heal', function(target, type)
 
 	if xPlayer.job.name == 'ambulance' then
 		TriggerClientEvent('esx_ambulancejob:heal', target, type)
-	end
-end)
-
-RegisterNetEvent('esx_ambulancejob:putInVehicle')
-AddEventHandler('esx_ambulancejob:putInVehicle', function(target)
-	local xPlayer = ESX.GetPlayerFromId(source)
-
-	if xPlayer.job.name == 'ambulance' then
-		TriggerClientEvent('esx_ambulancejob:putInVehicle', target)
 	end
 end)
 
@@ -206,10 +176,6 @@ ESX.RegisterCommand('revive', 'admin', function(xPlayer, args, showError)
 end, true, {help = _U('revive_help'), validate = true, arguments = {
 	{name = 'playerId', help = 'The player id', type = 'player'}
 }})
-
-ESX.RegisterCommand('reviveall', "admin", function(xPlayer, args, showError)
-	TriggerClientEvent('esx_ambulancejob:revive', -1)
-end, false)
 
 ESX.RegisterUsableItem('medikit', function(source)
 	if not playersHealing[source] then
