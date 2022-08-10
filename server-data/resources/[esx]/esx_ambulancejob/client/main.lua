@@ -18,19 +18,6 @@ AddEventHandler('esx:onPlayerSpawn', function()
 
 	if firstSpawn then
 		firstSpawn = false
-
-		if Config.SaveDeathStatus then
-			while not ESX.PlayerLoaded do
-				Wait(1000)
-			end
-
-			ESX.TriggerServerCallback('esx_ambulancejob:getDeathStatus', function(shouldDie)
-				if shouldDie then
-					Wait(1000)
-					SetEntityHealth(PlayerPedId(), 0)
-				end
-			end)
-		end
 	end
 end)
 
@@ -67,7 +54,6 @@ end)
 function OnPlayerDeath()
 	isDead = true
 	ESX.UI.Menu.CloseAll()
-	TriggerServerEvent('esx_ambulancejob:setDeathStatus', true)
 
 	StartDeathTimer()
 
@@ -242,7 +228,6 @@ function GetClosestRespawnPoint()
 end
 
 function RemoveItemsAfterRPDeath()
-	TriggerServerEvent('esx_ambulancejob:setDeathStatus', false)
 
 	CreateThread(function()
 		ESX.TriggerServerCallback('esx_ambulancejob:removeItemsAfterRPDeath', function()
@@ -280,7 +265,6 @@ RegisterNetEvent('esx_ambulancejob:revive')
 AddEventHandler('esx_ambulancejob:revive', function()
 	local playerPed = PlayerPedId()
 	local coords = GetEntityCoords(playerPed)
-	TriggerServerEvent('esx_ambulancejob:setDeathStatus', false)
 
 	DoScreenFadeOut(800)
 
@@ -299,8 +283,3 @@ AddEventHandler('esx_ambulancejob:revive', function()
 	AnimpostfxStop('DeathFailOut')
 	DoScreenFadeIn(800)
 end)
-
--- Load unloaded IPLs
-if Config.LoadIpl then
-	RequestIpl('Coroner_Int_on') -- Morgue
-end

@@ -4,14 +4,9 @@ Locales['it'] = {
   ['revive_complete_award'] = 'You have revived %s and earned $%s!',
   -- Misc
   ['actions_prompt'] = 'Press ~INPUT_CONTEXT~ access the Ambulance Actions.',
-  ['money_withdraw'] = 'Amount withdrawn',
   ['medikit'] = 'Medikit',
   ['bandage'] = 'Bende',
   ['max_item'] = 'You are already carrying enough.',
-  -- F6 Menu
-  ['ems_menu'] = 'EMS Menu',
-  ['ems_menu_title'] = 'Ambulance - EMS Menu',
-  ['ems_menu_revive'] = 'Revive Player',
   -- Death
   ['respawn_available_in'] = 'Respawn disponibile in %s minuti %s secondi',
   ['respawn_bleedout_in'] = 'Dissanguerai tra %s minuti %s secondi\n',
@@ -25,7 +20,6 @@ Locales['it'] = {
   ['used_bandage'] = 'You have used 1x bandage',
   ['not_enough_medikit'] = 'You do not have  medikit.',
   ['not_enough_bandage'] = 'You do not have  bandage.',
-  ['healed'] = 'You have been treated.',
   -- Blips
   ['respawn_point'] = 'Respawn',
 }

@@ -70,16 +70,6 @@ ESX.RegisterServerCallback('esx_ambulancejob:removeItemsAfterRPDeath', function(
 		return cb()
 	end
 
-	if Config.RemoveCashAfterRPDeath then
-		if xPlayer.getMoney() > 0 then
-			xPlayer.removeMoney(xPlayer.getMoney())
-		end
-
-		if xPlayer.getAccount('black_money').money > 0 then
-			xPlayer.setAccountMoney('black_money', 0)
-		end
-	end
-
 	if Config.RemoveItemsAfterRPDeath then
 		for i=1, #xPlayer.inventory, 1 do
 			if xPlayer.inventory[i].count > 0 then
@@ -200,21 +190,5 @@ ESX.RegisterUsableItem('bandage', function(source)
 
 		Wait(10000)
 		playersHealing[source] = nil
-	end
-end)
-
-ESX.RegisterServerCallback('esx_ambulancejob:getDeathStatus', function(source, cb)
-	local xPlayer = ESX.GetPlayerFromId(source)
-	MySQL.scalar('SELECT is_dead FROM users WHERE identifier = ?', {xPlayer.identifier}, function(isDead)
-		cb(isDead)
-	end)
-end)
-
-RegisterNetEvent('esx_ambulancejob:setDeathStatus')
-AddEventHandler('esx_ambulancejob:setDeathStatus', function(isDead)
-	local xPlayer = ESX.GetPlayerFromId(source)
-
-	if type(isDead) == 'boolean' then
-		MySQL.update('UPDATE users SET is_dead = ? WHERE identifier = ?', {isDead, xPlayer.identifier})
 	end
 end)
