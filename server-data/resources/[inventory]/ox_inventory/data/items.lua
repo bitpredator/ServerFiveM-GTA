@@ -193,4 +193,20 @@ return {
 		close = true,
 		description = nil
 	},
+
+	['cannabis'] = {
+		label = 'cannabis',
+		weight = 50,
+		stack = true,
+		close = true,
+		description = nil
+	},
+
+	['marijuana'] = {
+		label = 'marijuana',
+		weight = 50,
+		stack = true,
+		close = true,
+		description = nil
+	},
 }
