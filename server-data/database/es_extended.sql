@@ -27,10 +27,10 @@ CREATE TABLE IF NOT EXISTS `addon_account` (
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dump dei dati della tabella es_extended.addon_account: ~2 rows (circa)
+-- Dump dei dati della tabella es_extended.addon_account: ~3 rows (circa)
 INSERT INTO `addon_account` (`name`, `label`, `shared`) VALUES
 	('property_black_money', 'Argent Sale Propriété', 0),
-	('society_ambulance', 'Ambulance', 1),
+	('society_ambulance', 'EMS', 1),
 	('society_cardealer', 'Concessionnaire', 1);
 
 -- Dump della struttura di tabella es_extended.addon_account_data
@@ -48,7 +48,6 @@ CREATE TABLE IF NOT EXISTS `addon_account_data` (
 INSERT INTO `addon_account_data` (`id`, `account_name`, `money`, `owner`) VALUES
 	(1, 'society_cardealer', 0, NULL),
 	(2, 'society_ambulance', 0, NULL),
-	(3, 'property_black_money', 0, '');
 
 -- Dump della struttura di tabella es_extended.addon_inventory
 CREATE TABLE IF NOT EXISTS `addon_inventory` (
@@ -61,7 +60,6 @@ CREATE TABLE IF NOT EXISTS `addon_inventory` (
 -- Dump dei dati della tabella es_extended.addon_inventory: ~2 rows (circa)
 INSERT INTO `addon_inventory` (`name`, `label`, `shared`) VALUES
 	('property', 'Propriété', 0),
-	('society_ambulance', 'Ambulance', 1),
 	('society_cardealer', 'Concesionnaire', 1);
 
 -- Dump della struttura di tabella es_extended.addon_inventory_items
@@ -144,7 +142,6 @@ CREATE TABLE IF NOT EXISTS `jobs` (
 
 -- Dump dei dati della tabella es_extended.jobs: ~3 rows (circa)
 INSERT INTO `jobs` (`name`, `label`) VALUES
-	('ambulance', 'Ambulance'),
 	('cardealer', 'Concessionnaire'),
 	('unemployed', 'Unemployed');
 
@@ -161,17 +158,13 @@ CREATE TABLE IF NOT EXISTS `job_grades` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dump dei dati della tabella es_extended.job_grades: ~9 rows (circa)
+-- Dump dei dati della tabella es_extended.job_grades: ~5 rows (circa)
 INSERT INTO `job_grades` (`id`, `job_name`, `grade`, `name`, `label`, `salary`, `skin_male`, `skin_female`) VALUES
 	(1, 'unemployed', 0, 'unemployed', 'Unemployed', 200, '{}', '{}'),
 	(2, 'cardealer', 0, 'recruit', 'Recrue', 10, '{}', '{}'),
 	(3, 'cardealer', 1, 'novice', 'Novice', 25, '{}', '{}'),
 	(4, 'cardealer', 2, 'experienced', 'Experimente', 40, '{}', '{}'),
-	(5, 'cardealer', 3, 'boss', 'Patron', 0, '{}', '{}'),
-	(6, 'ambulance', 0, 'ambulance', 'Ambulancier', 20, '{"tshirt_2":0,"hair_color_1":5,"glasses_2":3,"shoes":9,"torso_2":3,"hair_color_2":0,"pants_1":24,"glasses_1":4,"hair_1":2,"sex":0,"decals_2":0,"tshirt_1":15,"helmet_1":8,"helmet_2":0,"arms":92,"face":19,"decals_1":60,"torso_1":13,"hair_2":0,"skin":34,"pants_2":5}', '{"tshirt_2":3,"decals_2":0,"glasses":0,"hair_1":2,"torso_1":73,"shoes":1,"hair_color_2":0,"glasses_1":19,"skin":13,"face":6,"pants_2":5,"tshirt_1":75,"pants_1":37,"helmet_1":57,"torso_2":0,"arms":14,"sex":1,"glasses_2":0,"decals_1":0,"hair_2":0,"helmet_2":0,"hair_color_1":0}'),
-	(7, 'ambulance', 1, 'doctor', 'Medecin', 40, '{"tshirt_2":0,"hair_color_1":5,"glasses_2":3,"shoes":9,"torso_2":3,"hair_color_2":0,"pants_1":24,"glasses_1":4,"hair_1":2,"sex":0,"decals_2":0,"tshirt_1":15,"helmet_1":8,"helmet_2":0,"arms":92,"face":19,"decals_1":60,"torso_1":13,"hair_2":0,"skin":34,"pants_2":5}', '{"tshirt_2":3,"decals_2":0,"glasses":0,"hair_1":2,"torso_1":73,"shoes":1,"hair_color_2":0,"glasses_1":19,"skin":13,"face":6,"pants_2":5,"tshirt_1":75,"pants_1":37,"helmet_1":57,"torso_2":0,"arms":14,"sex":1,"glasses_2":0,"decals_1":0,"hair_2":0,"helmet_2":0,"hair_color_1":0}'),
-	(8, 'ambulance', 2, 'chief_doctor', 'Medecin-chef', 60, '{"tshirt_2":0,"hair_color_1":5,"glasses_2":3,"shoes":9,"torso_2":3,"hair_color_2":0,"pants_1":24,"glasses_1":4,"hair_1":2,"sex":0,"decals_2":0,"tshirt_1":15,"helmet_1":8,"helmet_2":0,"arms":92,"face":19,"decals_1":60,"torso_1":13,"hair_2":0,"skin":34,"pants_2":5}', '{"tshirt_2":3,"decals_2":0,"glasses":0,"hair_1":2,"torso_1":73,"shoes":1,"hair_color_2":0,"glasses_1":19,"skin":13,"face":6,"pants_2":5,"tshirt_1":75,"pants_1":37,"helmet_1":57,"torso_2":0,"arms":14,"sex":1,"glasses_2":0,"decals_1":0,"hair_2":0,"helmet_2":0,"hair_color_1":0}'),
-	(9, 'ambulance', 3, 'boss', 'Chirurgien', 80, '{"tshirt_2":0,"hair_color_1":5,"glasses_2":3,"shoes":9,"torso_2":3,"hair_color_2":0,"pants_1":24,"glasses_1":4,"hair_1":2,"sex":0,"decals_2":0,"tshirt_1":15,"helmet_1":8,"helmet_2":0,"arms":92,"face":19,"decals_1":60,"torso_1":13,"hair_2":0,"skin":34,"pants_2":5}', '{"tshirt_2":3,"decals_2":0,"glasses":0,"hair_1":2,"torso_1":73,"shoes":1,"hair_color_2":0,"glasses_1":19,"skin":13,"face":6,"pants_2":5,"tshirt_1":75,"pants_1":37,"helmet_1":57,"torso_2":0,"arms":14,"sex":1,"glasses_2":0,"decals_1":0,"hair_2":0,"helmet_2":0,"hair_color_1":0}');
+	(5, 'cardealer', 3, 'boss', 'Patron', 0, '{}', '{}');
 
 -- Dump della struttura di tabella es_extended.licenses
 CREATE TABLE IF NOT EXISTS `licenses` (
@@ -356,14 +349,13 @@ CREATE TABLE IF NOT EXISTS `users` (
   `dateofbirth` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sex` varchar(1) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `height` int(11) DEFAULT NULL,
-  `is_dead` tinyint(1) DEFAULT 0,
   `disabled` tinyint(1) DEFAULT 0,
   `last_property` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`identifier`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dump dei dati della tabella es_extended.users: ~0 rows (circa)
-INSERT INTO `users` (`identifier`, `accounts`, `group`, `inventory`, `job`, `job_grade`, `loadout`, `position`, `skin`, `firstname`, `lastname`, `dateofbirth`, `sex`, `height`, `is_dead`, `disabled`, `last_property`) VALUES
+INSERT INTO `users` (`identifier`, `accounts`, `group`, `inventory`, `job`, `job_grade`, `loadout`, `position`, `skin`, `firstname`, `lastname`, `dateofbirth`, `sex`, `height`, `disabled`, `last_property`) VALUES
 
 -- Dump della struttura di tabella es_extended.user_licenses
 CREATE TABLE IF NOT EXISTS `user_licenses` (
@@ -398,6 +390,8 @@ INSERT INTO `vehicles` (`name`, `model`, `price`, `category`) VALUES
 	('Baller', 'baller2', 40000, 'suvs'),
 	('Baller Sport', 'baller3', 60000, 'suvs'),
 	('Banshee', 'banshee', 70000, 'sports'),
+	('Porsche 911', '911turbos', 30000'sports'),
+	('Cayman', 'pgtc4', 35000'sports'),
 	('Banshee 900R', 'banshee2', 255000, 'super'),
 	('Bati 801', 'bati', 12000, 'motorcycles'),
 	('Bati 801RR', 'bati2', 19000, 'motorcycles'),
